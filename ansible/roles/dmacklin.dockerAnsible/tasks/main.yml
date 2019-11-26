@@ -11,7 +11,7 @@
 
 
 - name: Allow apt to install over https
-  apt: name={{item}} state=installed
+  apt: name={{item}} state=present
   with_items:
        - apt-transport-https
        - ca-certificates
@@ -19,12 +19,12 @@
        - gnupg-agent
        - software-properties-common
 
-- name: Add Docker Key 
+- name: Add Docker Key
   apt_key:
     url: https://download.docker.com/linux/ubuntu/gpg
     state: present
 
-- name: Add Docker Repo 
+- name: Add Docker Repo
   apt_repository:
     repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable
     state: present
@@ -34,7 +34,7 @@
 #    update_cache: yes
 
 - name: Install docker
-  apt: name={{item}} state=installed
+  apt: name={{item}} state=present
   with_items:
         - docker-ce
         - docker-ce-cli

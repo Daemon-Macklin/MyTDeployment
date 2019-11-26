@@ -8,7 +8,7 @@ resource "openstack_compute_instance_v2" "DMacklinMyTDemo" {
   availability_zone = "nova"
   flavor_name = "ig.tiny"
   key_pair = "${var.openstack_keypair}"
-  security_groups = ["default"]
+  security_groups = ["default", "ssh", "ICMP"]
   network {
     name = "${var.tenant_network}"
     }
