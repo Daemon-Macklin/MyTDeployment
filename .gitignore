@@ -2,3 +2,5 @@
 *.tfstate.backup
 variables.tf
 .terraform/
+*.retry
+
