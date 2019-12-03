@@ -3,6 +3,7 @@ from ansible.executor.playbook_executor import PlaybookExecutor
 import subprocess
 import os
 import time
+import pprint
 
 def orchestration():
 
@@ -32,6 +33,7 @@ def serverCheck(floating_ip):
 
         if(response == 0):
             print("Host is up")
+            time.sleep(10)
             isUp = True
             break
         else:
@@ -50,8 +52,8 @@ def management(floating_ip):
     process = subprocess.Popen(executeCommand.split(), stdout=subprocess.PIPE, cwd="./ansible")
     output, error = process.communicate()
 
-    print(output)
-    print(error)
+    pprint(output)
+    pprint(error)
 
 def main():
     outputs = orchestration()
@@ -59,6 +61,7 @@ def main():
     isUp = serverCheck(outputs["instance_ip_addr"]["value"])
 
     if(isUp):
+        input("Press enter to continue")
         management(outputs["instance_ip_addr"]["value"])
     else:
         print("Error Connecting to host")
