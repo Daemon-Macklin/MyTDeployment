@@ -52,9 +52,6 @@ def management(floating_ip):
     process = subprocess.Popen(executeCommand.split(), stdout=subprocess.PIPE, cwd="./ansible")
     output, error = process.communicate()
 
-    pprint(output)
-    pprint(error)
-
 def main():
     outputs = orchestration()
 
