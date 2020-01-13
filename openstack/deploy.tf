@@ -6,7 +6,7 @@ resource "openstack_compute_instance_v2" "DMacklinMyTDemo" {
   name = "DMacklinMyTDemo"
   image_name = "ubuntu-1804-LTS"
   availability_zone = "nova"
-  flavor_name = "ig.tiny"
+  flavor_name = "ig.big.disk"
   key_pair = "${var.openstack_keypair}"
   security_groups = ["default", "ssh-open-world", "ICMP", "http"]
   network {
