@@ -42,19 +42,10 @@
 
 - name: Install docker-py
   pip:
-    name: docker-py
+    name: docker-compose
 
 - name: Download docker compose
   shell: curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 
 - name: Allow docker compose to run
   shell: chmod +x /usr/local/bin/docker-compose
-
-- name: Create a nginx container
-  docker_container:
-    name: nginxDemo
-    image: nginx
-    detach: yes
-    state: started
-    ports:
-      - "80:80"

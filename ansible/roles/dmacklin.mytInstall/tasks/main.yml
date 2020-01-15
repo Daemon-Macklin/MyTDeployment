@@ -1,0 +1,30 @@
+---
+
+- name: Pull MyT git repo
+  git:
+    repo: https://github.com/Daemon-Macklin/MyTPlatformDataProcessingContainer
+    dest: /opt/MyTApplication
+
+- name: Configure data processing script
+  copy:
+    src: ../templates/dataProcessing.py
+    dest: /opt/MyTApplication/dataProcessing.py
+
+- name: Set Ownership of application to ubuntu
+  file:
+    path: /opt/MyTApplication
+    state: directory
+    recurse: yes
+    owner: ubuntu
+    group: ubuntu
+
+- name: Build Data Processing Docker image from Dockerfile
+  docker_image:
+    name: myt-processing
+    path: /opt/MyTApplication
+    state: build
+
+- name: Create and start services
+  docker_compose:
+    project_src: /opt/MyTApplication
+  register: output
